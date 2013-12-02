@@ -1,11 +1,12 @@
 define([], function(store){
+	
     return {
 		start: function() {
 			console.log("start");
 			
 			var onupgradeneeded = function(e) {
-				console.log("onupgradeneeded");
-				db = event.target.result;
+				alert("onupgradeneeded");
+				app.db = event.target.result;
 
 				var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });	
 				objectStore.createIndex("name", "name", { unique: false });
@@ -20,8 +21,8 @@ define([], function(store){
 			var request = indexedDB.open("proof_of_concept2");
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
-				console.log("request.onsuccess");
-				var db = e.target.result;
+				alert("request.onsuccess");
+				app.db = e.target.result;
 				var transaction = db.transaction("customers", "readwrite");
 				var key;
 				var customers = transaction.objectStore("customers");

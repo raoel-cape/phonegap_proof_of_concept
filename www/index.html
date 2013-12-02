@@ -47,17 +47,17 @@
 					{ name: "db", location: "poc", main: "db"},
 					{ name: "storehouse", location: "lib/storehouse", main: "Storehouse" }
 				]
-			};
+			}; 
 		</script>
 		<script type="text/javascript" data-dojo-config="async: true" src="js/lib/dojo/dojo.js.uncompressed.js"></script>
 		
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
-			console.log("useragent:" + navigator.userAgent);
+			alert("useragent:" + navigator.userAgent);
 			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
 				require(["phonegap.js"],function() {
-					document.addEventListener("deviceready", onDeviceReady, false);
+					document.addEventListener("deviceready", app.onDeviceReady, false);
 				});
 			  
 			} else {
