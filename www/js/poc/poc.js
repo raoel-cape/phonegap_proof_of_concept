@@ -3,9 +3,8 @@ define([], function(store){
 		start: function() {
 			console.log("start");
 			
-			//string myString = "hallo";
-			//store.put(myString, { id: 0 , overwrite: false} );
 			var onupgradeneeded = function(e) {
+				console.log("onupgradeneeded");
 				db = event.target.result;
 
 				var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });	
@@ -21,6 +20,7 @@ define([], function(store){
 			var request = indexedDB.open("proof_of_concept2");
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
+				console.log("request.onsuccess");
 				var db = e.target.result;
 				var transaction = db.transaction("customers", "readwrite");
 				var key;
@@ -29,6 +29,7 @@ define([], function(store){
 				key = customers.add({ ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" });
 				var transaction2 = db.transaction("customers");
 				transaction2.objectStore("customers").openCursor().onsuccess = function(e) {
+					console.log("openCursor");
 					 var cursor = e.target.result;
 					 var results = [];
 					 if (cursor) {
