@@ -43,6 +43,10 @@ define([], function(store){
 					 }
 				};
 			}; 
+			request.onerror = function(e) { 
+				alert ("error request"); 
+				alert(e);
+			} ;
 			
 			
 			
