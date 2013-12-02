@@ -54,6 +54,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+			console.log("useragent:" + navigator.userAgent);
 			if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
 				require(["phonegap.js"],function() {
 					document.addEventListener("deviceready", onDeviceReady, false);
