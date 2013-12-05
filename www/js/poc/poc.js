@@ -24,7 +24,7 @@ define([], function(store){
 			
 			
 			
-			var request = indexedDB.open("proof_of_concept2", 2);
+			var request = indexedDB.open("proof_of_concept2");
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
 				alert("request.onsuccess");
@@ -57,12 +57,16 @@ define([], function(store){
 				}
 				catch(e) {
 					alert("error");
-					alert(e);
+					require(["dojo/json"], function(json) {
+						alert(json.stringify(e));
+					});
 				}
 			}; 
 			request.onerror = function(e) { 
 				alert ("error request"); 
-				alert(e);
+				require(["dojo/json"], function(json) {
+					alert(json.stringify(e));
+				});
 			} ;
 			
 			

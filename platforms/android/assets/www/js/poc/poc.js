@@ -7,18 +7,24 @@ define([], function(store){
 			var onupgradeneeded = function(e) {
 				alert("onupgradeneeded");
 				app.db = event.target.result;
-
-				var objectStore = app.db.createObjectStore("customers", { keyPath: "ssn" });	
-				objectStore.createIndex("name", "name", { unique: false });
-				objectStore.createIndex("email", "email", { unique: true });
-				
-				var objectStore2 = app.db.createObjectStore("logging",  { autoIncrement : true });
-				objectStore2.createIndex("debug", "debug", { unique: false });
+				try {
+					var objectStore = app.db.createObjectStore("customers", { keyPath: "ssn" });	
+					objectStore.createIndex("name", "name", { unique: false });
+					objectStore.createIndex("email", "email", { unique: true });
+					
+					/*var objectStore2 = app.db.createObjectStore("logging",  { autoIncrement : true });
+					objectStore2.createIndex("debug", "debug", { unique: false });*/
+				}
+				catch(e)
+				{
+					alert("onupgradeneeded error");
+					alert(e);
+				}
 			};
 			
 			
 			
-			var request = indexedDB.open("proof_of_concept2", 2);
+			var request = indexedDB.open("proof_of_concept2");
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
 				alert("request.onsuccess");
@@ -51,12 +57,16 @@ define([], function(store){
 				}
 				catch(e) {
 					alert("error");
-					alert(e);
+					require(["dojo/json"], function(json) {
+						alert(json.stringify(e));
+					});
 				}
 			}; 
 			request.onerror = function(e) { 
 				alert ("error request"); 
-				alert(e);
+				require(["dojo/json"], function(json) {
+					alert(json.stringify(e));
+				});
 			} ;
 			
 			
