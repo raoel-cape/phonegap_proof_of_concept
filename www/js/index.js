@@ -34,7 +34,13 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		app.start();
+			var x = document.createElement("script");
+		x.src = "js/lib/IndexedDBShim.min.js";
+		x.onload = function(){
+			window.setTimeout(app.start, 2000);
+		};
+		document.body.appendChild(x);
+		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -48,7 +54,9 @@ var app = {
         console.log('Received Event: ' + id);
     },
 	start: function() {
-		require(["poc/poc",  "js/lib/IndexedDBShim.min.js"], function(poc){
+	
+				
+		require(["poc/poc"  ], function(poc){
 			if (typeof window.mozIndexedDB !== "undefined") {
 				window.indexedDB = window.mozIndexedDB;
 			}

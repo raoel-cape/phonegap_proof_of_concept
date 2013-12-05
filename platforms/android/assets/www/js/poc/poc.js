@@ -8,6 +8,9 @@ define([], function (store) {
             // these two event handlers act on the IDBDatabase object, when the database is opened successfully, or not
             request.onerror = function (event) {
                 alert('<li>Error loading database.</li>');
+				require(["dojo/json"], function(JSON){
+				  alert(JSON.stringify(event));
+				});
             };
 
             request.onsuccess = function (event) {
