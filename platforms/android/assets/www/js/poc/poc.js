@@ -33,6 +33,10 @@ define([], function(store){
 					app.db = e.target.result;
 					alert("start transaction");
 					var transaction = app.db.transaction("customers", "readwrite");
+					if(!transaction.db.objectStoreNames.contains("customers"))
+					{
+						alert("no customers object store");
+					}
 					alert("end transaction");
 					var key;
 					alert("1");
