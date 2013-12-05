@@ -3,6 +3,7 @@ define([], function(store){
     return {
 		start: function() {
 			console.log("start");
+			var dbName = "proof_of_concept2";
 			
 			var onupgradeneeded = function(e) {
 				alert("onupgradeneeded");
@@ -22,9 +23,9 @@ define([], function(store){
 				}
 			};
 			
+			indexedDB.deleteDatabase(dbName);
 			
-			
-			var request = indexedDB.open("proof_of_concept2");
+			var request = indexedDB.open(dbName);
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
 				alert("request.onsuccess");
