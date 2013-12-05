@@ -59,7 +59,48 @@ var app = {
 			}
 			alert("here");
 			poc.start();
+			
+			
+			
 		} );
+	},
+	startagain: function(db) {
+		
+		
+		app.start2();
+	},
+	start2: function() {
+	// open a read/write db transaction, ready for adding the data
+      var transaction = db.transaction(["toDoList"], "readwrite");
+	  // create an object store on the transaction
+      var objectStore = transaction.objectStore("toDoList");
+      
+	  // grab the values entered into the form fields and store them in an object ready for being inserted into the IDB
+      var newItem = [
+        { taskTitle: "titel", hours: 3, minutes: 10, day: "ja", month: 5, year: 2013, notified: "no" },
+		{ taskTitle: "titel2", hours: 6, minutes: 10, day: "ja", month: 5, year: 2013, notified: "no" }
+
+      ];
+	  
+	  // add our newItem object to the object store
+      var request = objectStore.add(newItem[0]);        
+	  
+      request.onsuccess  = app.start3;
+	  request.onerror = app.start3;
+	
+	},
+	start3: function(e) {
+		var objectStore = db.transaction('toDoList').objectStore('toDoList');
+		objectStore.openCursor().onsuccess = app.start4;
+		
+	},
+	start4: function(e) {
+		var cursor = e.target.result ;
+		if(cursor) {			
+			alert(cursor.value.taskTitle);
+			cursor.continue();
+		}
 	}
+	
 
 };
