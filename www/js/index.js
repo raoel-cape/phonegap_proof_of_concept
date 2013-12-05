@@ -49,6 +49,14 @@ var app = {
     },
 	start: function() {
 		require(["poc/poc",  "js/lib/IndexedDBShim.min.js"], function(poc){
+			if (typeof window.mozIndexedDB !== "undefined") {
+				window.indexedDB = window.mozIndexedDB;
+			}
+			else {
+				window.indexedDB = window.shimIndexedDB;
+				window.shimIndexedDB.__useShim();
+				window.shimIndexedDB.__debug(true);
+			}
 			alert("here");
 			poc.start();
 		} );
