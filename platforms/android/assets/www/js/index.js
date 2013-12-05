@@ -45,5 +45,12 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+	start: function() {
+		require(["poc/poc",  "js/lib/IndexedDBShim.min.js"], function(poc){
+			alert("here");
+			poc.start();
+		} );
+	}
+
 };
