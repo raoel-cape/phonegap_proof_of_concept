@@ -22,27 +22,33 @@ define([], function(store){
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
 				alert("request.onsuccess");
-				app.db = e.target.result;
-				var transaction = app.db.transaction("customers", "readwrite");
-				var key;
-				var customers = transaction.objectStore("customers");
-				key = customers.add({ ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" });
-				key = customers.add({ ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" });
-				var transaction2 = app.db.transaction("customers");
-				transaction2.objectStore("customers").openCursor().onsuccess = function(e) {
-					console.log("openCursor");
-					 var cursor = e.target.result;
-					 var results = [];
-					 if (cursor) {
-						  results.push(cursor.value) 
-						  cursor.continue();
-					 };
-					 for(var i = 0, len = results.length; i<len; i++)
-					 {
-						var result = results[i];
-						alert(result.ssn);
-					 }
-				};
+				try {
+					app.db = e.target.result;
+					var transaction = app.db.transaction("customers", "readwrite");
+					var key;
+					var customers = transaction.objectStore("customers");
+					key = customers.add({ ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" });
+					key = customers.add({ ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" });
+					var transaction2 = app.db.transaction("customers");
+					transaction2.objectStore("customers").openCursor().onsuccess = function(e) {
+						console.log("openCursor");
+						 var cursor = e.target.result;
+						 var results = [];
+						 if (cursor) {
+							  results.push(cursor.value) 
+							  cursor.continue();
+						 };
+						 for(var i = 0, len = results.length; i<len; i++)
+						 {
+							var result = results[i];
+							alert(result.ssn);
+						 }
+					};
+				}
+				catch(e) {
+					alert("error");
+					alert(e);
+				}
 			}; 
 			request.onerror = function(e) { 
 				alert ("error request"); 
