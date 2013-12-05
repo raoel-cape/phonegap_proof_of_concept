@@ -24,9 +24,13 @@ define([], function(store){
 				alert("request.onsuccess");
 				try {
 					app.db = e.target.result;
+					alert("start transaction");
 					var transaction = app.db.transaction("customers", "readwrite");
+					alert("end transaction");
 					var key;
+					alert("1");
 					var customers = transaction.objectStore("customers");
+					alert("2");
 					key = customers.add({ ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" });
 					key = customers.add({ ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" });
 					var transaction2 = app.db.transaction("customers");
