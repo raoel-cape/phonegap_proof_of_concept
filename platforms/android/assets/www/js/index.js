@@ -37,7 +37,7 @@ var app = {
 			var x = document.createElement("script");
 		x.src = "js/lib/IndexedDBShim.min.js";
 		x.onload = function(){
-			window.setTimeout(app.start, 2000);
+			window.setTimeout(app.start, 5000);
 		};
 		document.body.appendChild(x);
 		
