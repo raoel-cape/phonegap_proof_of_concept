@@ -23,7 +23,7 @@ define([], function(store){
 				}
 			};
 			
-			indexedDB.deleteDatabase(dbName);
+			
 			
 			var request = indexedDB.open(dbName);
 			request.onupgradeneeded = onupgradeneeded;
