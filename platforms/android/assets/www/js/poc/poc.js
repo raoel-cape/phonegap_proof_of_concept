@@ -8,11 +8,11 @@ define([], function(store){
 				alert("onupgradeneeded");
 				app.db = event.target.result;
 
-				var objectStore = app.db.createObjectStore("customers", { keyPath: "ssn" });	
+				var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });	
 				objectStore.createIndex("name", "name", { unique: false });
 				objectStore.createIndex("email", "email", { unique: true });
 				
-				var objectStore2 = app.db.createObjectStore("logging",  { autoIncrement : true });
+				var objectStore2 = db.createObjectStore("logging",  { autoIncrement : true });
 				objectStore2.createIndex("debug", "debug", { unique: false });
 			};
 			
@@ -59,9 +59,9 @@ define([], function(store){
 			
 			/*require(["poc/db"], function(db){
 				var textObject = "qwerty";
-				app.db.insert(textObject);
+				db.insert(textObject);
 				
-				var result = app.db.retrieve();
+				var result = db.retrieve();
 				alert("result: " + result);
 			});*/
 			
