@@ -34,7 +34,6 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-		app.start();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -45,11 +44,6 @@ var app = {
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        alert('Received Event: ' + id);
-    },
-	start: function() {
-		require(["poc/poc",  "js/lib/IndexedDBShim.min.js"], function(poc){
-			poc.start();
-		} );
-	}
+        console.log('Received Event: ' + id);
+    }
 };
