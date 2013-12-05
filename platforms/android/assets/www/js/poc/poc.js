@@ -18,7 +18,7 @@ define([], function(store){
 			
 			
 			
-			var request = indexedDB.open("proof_of_concept2");
+			var request = indexedDB.open("proof_of_concept2", 2);
 			request.onupgradeneeded = onupgradeneeded;
 			request.onsuccess = function (e) {
 				alert("request.onsuccess");
